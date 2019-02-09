@@ -390,6 +390,16 @@ void GazeboMavlinkInterface::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf
     }
   }
 
+  if (_sdf->HasElement("h1_joint")) {
+    std::string h1_joint_name = _sdf->GetElement("h1_joint")->Get<std::string>();
+    h1_joint_ = model_->GetJoint(h1_joint_name);
+    int control_index;
+    getSdfParam<int>(_sdf->GetElement("h1_joint"), "input_index", control_index, -1);
+    if (control_index >= 0) {
+      joints_.at(control_index) = h1_joint_;
+    }
+  }
+
   if (_sdf->HasElement("cgo3_mount_joint")) {
     std::string gimbal_yaw_joint_name = _sdf->GetElement("cgo3_mount_joint")->Get<std::string>();
     gimbal_yaw_joint_ = model_->GetJoint(gimbal_yaw_joint_name);
@@ -986,16 +996,32 @@ void GazeboMavlinkInterface::handle_control(double _dt)
           //       << "] cmd[" << target << "] f[" << force
           //       << "] scale[" << input_scaling_[i] << "]\n";
         }
-        else if (joint_control_type_[i] == "position")
-        {
-          double current = joints_[i]->GetAngle(0).Radian();
-          double err = current - target;
-          double force = pids_[i].Update(err, _dt);
-          joints_[i]->SetForce(0, force);
-          // gzerr << "chan[" << i << "] curr[" << current
-          //       << "] cmd[" << target << "] f[" << force
-          //       << "] scale[" << input_scaling_[i] << "]\n";
-        }
+        // else if (joint_control_type_[i] == "position")
+        // {
+        //   double current = joints_[i]->GetAngle(0).Radian();
+        //   double err = current - target;
+        //   double force = pids_[i].Update(err, _dt);
+        //   joints_[i]->SetForce(0, force);
+        //   // gzerr << "chan[" << i << "] curr[" << current
+        //   //       << "] cmd[" << target << "] f[" << force
+        //   //       << "] scale[" << input_scaling_[i] << "]\n";
+        // }
+
+       else if (joint_control_type_[i] == "position")
+       {
+         input_reference_[8] = input_reference_[4];
+         input_reference_[9] = input_reference_[4];
+
+         double current = joints_[i]->GetAngle(0).Radian();
+         double err = input_reference_[i]-current;  //HARD CODED INPUT from channel [4], Had to do this because I couldn't figure out how to get more than 8 channels from the mixer into Gazebo.
+//          double force = pids_[i].Update(err, _dt); //For some reason, this doesn't update and hence, the force is always zero.
+         double force = err*20; //With the right limits in the .sdf, this works great.
+         joints_[i]->SetForce(0, force);
+//           gzerr << "chan[" << i << "] curr[" << current
+//                 << "] cmd[" << target << "] err[" << err << "] f[" << force
+//                 << "] scale[" << input_scaling_[i] << "]\n";
+       }
+
         else if (joint_control_type_[i] == "position_gztopic")
         {
           #if GAZEBO_MAJOR_VERSION >= 7 && GAZEBO_MINOR_VERSION >= 4

@@ -94,6 +94,9 @@ class GazeboMavlinkInterface : public ModelPlugin {
         right_elevon_joint_(nullptr),
         elevator_joint_(nullptr),
         propeller_joint_(nullptr),
+
+        h1_joint_(nullptr),
+
         gimbal_yaw_joint_(nullptr),
         gimbal_pitch_joint_(nullptr),
         gimbal_roll_joint_(nullptr),
@@ -132,6 +135,10 @@ class GazeboMavlinkInterface : public ModelPlugin {
   physics::WorldPtr world_;
   physics::JointPtr left_elevon_joint_;
   physics::JointPtr right_elevon_joint_;
+
+  physics::JointPtr h1_joint_;
+
+
   physics::JointPtr elevator_joint_;
   physics::JointPtr propeller_joint_;
   physics::JointPtr gimbal_yaw_joint_;
