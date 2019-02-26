@@ -30,9 +30,6 @@ TSAeroPlugin::TSAeroPlugin(): k_lift(3.48e-6), k_drag(1.75e-6), k_pitch(-3.44e-7
   this->cp = math::Vector3(0, 0, 0);
   this->forward = math::Vector3(0, 0, 1);
   this->upward = math::Vector3(1, 0, 0);
-  printf("Hello World!\n");
-  printf("Hello World!\n");
-
 }
 
 /////////////////////////////////////////////////
@@ -130,7 +127,7 @@ void TSAeroPlugin::OnUpdate()
   //Get propeller speed and elevon deflection
   double prop_rads = motorJoint->GetVelocity(0) * 10.0; //Multiply by slow-down sim factor
   double delta = controlJoint->GetAngle(0).Radian();
-  printf("aerodynamics plugin: speed = %f\n", prop_rads);
+  printf("aerodynamics plugin: prop speed = %f\n", prop_rads);
   printf("aerodynamics plugin: deflection = %f\n", delta);
 
   // pose of body
