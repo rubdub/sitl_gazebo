@@ -358,7 +358,7 @@ Left Elevon
           <!-- <lower>1.5707</lower>
           <upper>1.5707</upper> -->
           <lower>0</lower>
-          <upper>1.5707</upper>
+          <upper>0</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
@@ -380,7 +380,7 @@ Left Elevon
         <limit>
           <!-- -30/+30 deg. -->
           <lower>0</lower>
-          <upper>1.5707</upper>
+          <upper>0</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
@@ -403,7 +403,7 @@ Left Elevon
         <limit>
           <!-- -30/+30 deg. -->
           <lower>0</lower>
-          <upper>1.5707</upper>
+          <upper>0</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
