@@ -205,4 +205,6 @@ void TSAeroPlugin::OnUpdate()
   this->link->AddForceAtRelativePosition(force, this->cp);
   this->link->AddTorque(torque);
   printf("aerodynamics plugin: f = %f, t = %f\n", force.GetLength(), torque.GetLength());
+  printf("aero plugin: Force %f %f %f |  Torque %f %f %f \n",force.x,force.y,force.z,torque.x, torque.y,torque.z );
+  //printf("aero plugin: Force %f ",force.x );
 }
