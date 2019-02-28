@@ -979,7 +979,7 @@ Left Elevon
         <plugin name="right_elevon_aero" filename="libgazebo_ts_aerodynamic_plugin.so">
         <k_lift>0.00000348</k_lift>
         <k_drag>0.00000175</k_drag>
-        <k_pitch>-0.000000344</k_pitch>
+        <k_pitch>-0.00000644</k_pitch>
         <cp>0 0.195 0.036</cp>
         <forward>1 0 0</forward>
         <upward>0 0 1</upward>
@@ -993,7 +993,7 @@ Left Elevon
     <plugin name="left_elevon_aero" filename="libgazebo_ts_aerodynamic_plugin.so">
         <k_lift>0.00000348</k_lift>
         <k_drag>0.00000175</k_drag>
-        <k_pitch>-0.000000344</k_pitch>
+        <k_pitch>-0.00000644</k_pitch>
         <cp>0 0.195 0.036</cp>
         <forward>1 0 0</forward>
         <upward>0 0 1</upward>
