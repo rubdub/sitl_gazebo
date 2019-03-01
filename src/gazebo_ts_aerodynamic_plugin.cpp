@@ -127,8 +127,8 @@ void TSAeroPlugin::OnUpdate()
   //Get propeller speed and elevon deflection
   double prop_rads = motorJoint->GetVelocity(0) * 10.0; //Multiply by slow-down sim factor
   double delta = controlJoint->GetAngle(0).Radian();
-  printf("aerodynamics plugin: prop speed = %f\n", prop_rads);
-  printf("aerodynamics plugin: deflection = %f\n", delta);
+  // printf("aerodynamics plugin: prop speed = %f\n", prop_rads);
+  // printf("aerodynamics plugin: deflection = %f\n", delta);
 
   // pose of body
   math::Pose pose = this->link->GetWorldPose();
@@ -204,7 +204,7 @@ void TSAeroPlugin::OnUpdate()
   // apply forces at cg (with torques for position shift)
   this->link->AddForceAtRelativePosition(force, this->cp);
   this->link->AddTorque(torque);
-  printf("aerodynamics plugin: f = %f, t = %f\n", force.GetLength(), torque.GetLength());
-  printf("aero plugin: Force %f %f %f |  Torque %f %f %f \n",force.x,force.y,force.z,torque.x, torque.y,torque.z );
+  // printf("aerodynamics plugin: f = %f, t = %f\n", force.GetLength(), torque.GetLength());
+  // printf("aero plugin: Force %f %f %f |  Torque %f %f %f \n",force.x,force.y,force.z,torque.x, torque.y,torque.z );
   //printf("aero plugin: Force %f ",force.x );
 }
